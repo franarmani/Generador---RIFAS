@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Generador # rifas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+
+        #canvas {
+            width: 595px;
+            height: 842px;
+            background-image: url("./1.jpg");
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .numero {
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            text-align: center;
+        }
+
+        /* Diseño de los números */
+        #n1, #n2, #n3, #n4, #n5, #n6, #n7, #n8,
+        #n9, #n10, #n11, #n12, #n13, #n14, #n15, #n16,
+        #n17, #n18, #n19, #n20, #n21, #n22, #n23, #n24 {
+            font-size: 20px;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+
+        /* Primeros 8 */
+        #n1{
+            right: 497px;
+            top: 25px;
+        }
+        #n2{
+            right: 477px;
+            bottom: 562px;
+        }
+
+        #n3{
+            right: 353px;
+            top: 25px
+        }
+        #n4{
+            right: 331px;
+            bottom: 562px;
+        }
+
+        #n5{
+            right: 209px;
+            top: 25px
+        }
+        #n6{
+            right: 185px;
+            bottom: 562px;
+        }
+
+        #n7{
+            right: 65px;
+            top: 25px
+        }
+        #n8{
+            right: 39px;
+            bottom: 562px;
+        }
+
+        /* Primeros 8 */
+        /* Segundos 8 */
+
+        #n9{
+            right: 497px;
+            top: 305px;
+        }
+        #n10{
+            right: 477px;
+            bottom: 287px;
+        }
+
+        #n11{
+            right: 353px;
+            top: 305px;
+        }
+        #n12{
+            right: 331px;
+            bottom: 287px;
+        }
+
+        #n13{
+            right: 209px;
+            top: 305px;
+        }
+        #n14{
+            right: 185px;
+            bottom: 287px;
+        }
+
+        #n15{
+            right: 65px;
+            top: 305px;
+        }
+        #n16{
+            right: 39px;
+            bottom: 287px;
+        }
+
+        /* Segundos 8 */
+        /* Terceros 8 */
+
+        #n17{
+            right: 497px;
+            bottom: 239px;
+        }
+        #n18{
+            right: 477px;
+            bottom: 10px;
+        }
+
+        #n19{
+            right: 353px;
+            bottom: 239px;
+        }
+        #n20{
+            right: 331px;
+            bottom: 10px;
+        }
+
+        #n21{
+            right: 209px;
+            bottom: 239px;
+        }
+        #n22{
+            right: 185px;
+            bottom: 10px;
+        }
+
+        #n23{
+            right: 65px;
+            bottom: 78px;
+        }
+        #n24{
+            right: 39px;
+            bottom: 10px;
+        }
+
+        /* Terceros 8 */
+        /* Botones */
+        button {
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #NumeroDePagina {
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* Contenedor general */
+        .container {
+            text-align: center;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="canvas">
+            <div class="numero" id="n1">1</div>
+            <div class="numero" id="n2">1</div>
+            <div class="numero" id="n3">2</div>
+            <div class="numero" id="n4">2</div>
+            <div class="numero" id="n5">3</div>
+            <div class="numero" id="n6">3</div>
+            <div class="numero" id="n7">4</div>
+            <div class="numero" id="n8">4</div>
+            <div class="numero" id="n9">5</div>
+            <div class="numero" id="n10">5</div>
+            <div class="numero" id="n11">6</div>
+            <div class="numero" id="n12">6</div>
+            <div class="numero" id="n13">7</div>
+            <div class="numero" id="n14">7</div>
+            <div class="numero" id="n15">8</div>
+            <div class="numero" id="n16">8</div>
+            <div class="numero" id="n17">9</div>
+            <div class="numero" id="n18">9</div>
+            <div class="numero" id="n19">10</div>
+            <div class="numero" id="n20">10</div>
+            <div class="numero" id="n21">11</div>
+            <div class="numero" id="n22">11</div>
+            <div class="numero" id="n23">12</div>
+            <div class="numero" id="n24">12</div>
+        </div>
+
+        <div id="NumeroDePagina">Numero de pagina: 1</div>
+
+        <div class="button-container">
+            <button id="sumar">Sumar</button>
+            <button id="resta">Restar</button>
+            <button id="pdf">Generar PDF</button>
+            <a href="https://drive.google.com/file/d/1xIzm2ZCbVSfQyqiOdJ-0-wSxwxxqVo7v/view?usp=sharing"><button>Descargar plantilla base</button></a>
+        </div>
+    </div>
+
+    <script>
+        const sumar = document.getElementById("sumar");
+        const resta = document.getElementById("resta");
+        const pdf = document.getElementById("pdf");
+        const NumeroDePagina = document.getElementById("NumeroDePagina");
+        let nDePagina = 1;
+
+        const cambiaValores = (operacion) => {
+            const nodos = document.getElementsByClassName("numero");
+            const nodosArray = Array.from(nodos);
+            if (operacion == "mas") {
+                nDePagina += 1;
+                NumeroDePagina.innerText = "Numero de pagina: " + nDePagina;
+                nodosArray.map((ele) => {
+                    return ele.innerText = parseInt(ele.innerText) + 12;
+                });
+            } else {
+                nDePagina -= 1;
+                NumeroDePagina.innerText = "Numero de pagina: " + nDePagina;
+                nodosArray.map((ele) => {
+                    return ele.innerText = parseInt(ele.innerText) - 12;
+                });
+            }
+        };
+
+        sumar.addEventListener("click", () => {
+            cambiaValores("mas");
+        });
+        resta.addEventListener("click", () => {
+            cambiaValores("menos");
+        });
+
+        pdf.addEventListener("click", () => {
+            html2canvas(document.getElementById("canvas")).then(canvasImg => {
+                const doc = new jspdf.jsPDF();
+                const imgData = canvasImg.toDataURL("image/png");
+                doc.addImage(imgData, 'PNG', 10, 10, 180, 250);
+                doc.save("tarjetas.pdf");
+            });
+        });
+    </script>
+</body>
+</html>
+
+
